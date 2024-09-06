@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('numero');
+            $table->integer('capacidade');
+            $table->enum('status',['disponivel', 'ocupada', 'reservada'] );
         });
     }
 

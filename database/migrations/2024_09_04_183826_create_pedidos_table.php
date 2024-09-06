@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamp('data_hora', );
+            $table->enum('status_pedido', ['aberto', 'fechado', 'pago']);
+            $table->unsignedBigInteger('cliente_id');
+            $table->unsignedBigInteger('mesa_id');
+            $table->unsignedBigInteger('funcionario_id');
+
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('cascade');
+            $table->foreign('funcionario_id')->references('id')->on('funcionarios')->onDelete('cascade');
         });
     }
 

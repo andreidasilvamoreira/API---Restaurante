@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('inventarios', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nome', 100);
+            $table->text('descricao');
+            $table->integer('unidade');
+            $table->decimal('preco_custado', 10, 2);
+            $table->unsignedBigInteger('fornecedor_id');
+
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedores')->onDelete('cascade');
         });
     }
 

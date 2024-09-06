@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('itens_menu', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nome', '100');
+            $table->text('descricao');
+            $table->decimal('preco', 10,2);
+            $table->enum('disponibilidade', ['disponivel', 'indisponivel']);
+            $table->unsignedBigInteger('categoria_id');
+
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
         });
     }
 

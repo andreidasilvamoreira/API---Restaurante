@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('itens_pedido', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('quantidade');
+            $table->decimal('preco_unitario', 10,2);
+            $table->text('observacoes');
+            $table->unsignedBigInteger('pedido_id');
+            $table->unsignedBigInteger('item_menu');
+            $table->unsignedBigInteger('inventario_id');
+
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
+            $table->foreign('item_menu')->references('id')->on('itens_menu')->onDelete('cascade');
+            $table->foreign('inventario_id')->references('id')->on('inventario')->onDelete('cascade');
         });
     }
 

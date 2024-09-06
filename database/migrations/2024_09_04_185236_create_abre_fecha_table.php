@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('abre_fecha', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('total_pedidos');
+            $table->time('hora_abertura');
+            $table->time('hora_fechamento');
+            $table->unsignedBigInteger('mesa_id');
+            $table->unsignedBigInteger('pedido_id');
+
+            $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('cascade');
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
         });
     }
 

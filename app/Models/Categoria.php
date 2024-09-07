@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nome',
+        'descricao'
+    ];
+
+    public $timestamps= false;
+
+    public function itensMenu()
+    {
+        return $this->hasMany(Item_menu::class, 'categoria_id');
+    }
 }
